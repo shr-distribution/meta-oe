@@ -1,0 +1,37 @@
+From: Ben Deering <ben_deering@swissmail.org>
+
+emotion opens several devices on startup to check for webcams
+if the device is not a webcam emotion never closes the device.
+This prevents rmmod of the device's driver as well as other problems.
+
+Upstream-Status: Backport
+
+New EFL-1.8 shouldn't need this after
+http://git.enlightenment.org/core/efl.git/diff/src/lib/emotion/emotion_webcam.c?id=5d6e30fae04a5d2aca3daf8eab5fe0d60b870330
+
+Signed-off-by: Ben Deering <ben_deering@swissmail.org>
+---
+ src/lib/emotion_main.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/lib/emotion_main.c b/src/lib/emotion_main.c
+index 52b1baa..d7b04a0 100644
+--- a/src/lib/emotion_main.c
++++ b/src/lib/emotion_main.c
+@@ -234,8 +234,12 @@ _emotion_check_device(Emotion_Webcam *ew)
+    fd = open(ew->filename, O_RDONLY);
+    if (fd < 0) goto on_error;
+ 
+-   if (ioctl(fd, VIDIOC_QUERYCAP, &caps) == -1) goto on_error;
+-
++   if (ioctl(fd, VIDIOC_QUERYCAP, &caps) == -1)
++   {
++      close(fd);
++      goto on_error;
++   }
++   close(fd);
+    /* Likely not a webcam */
+    if (!caps.capabilities & V4L2_CAP_VIDEO_CAPTURE) goto on_error;
+    if (caps.capabilities & V4L2_CAP_TUNER
+-- 
+1.7.12

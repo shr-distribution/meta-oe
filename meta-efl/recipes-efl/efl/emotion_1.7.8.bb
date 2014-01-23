@@ -16,6 +16,7 @@ RREPLACES_${PN} = "libemotion0"
 
 SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+    file://fix.not.closing.camera.patch \
 "
 
 SRC_URI[md5sum] = "e04679ac7967e698c8c4013b9fd209a1"
