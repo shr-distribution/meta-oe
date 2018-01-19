@@ -35,6 +35,10 @@ inherit autotools gettext pythonnative python-dir pkgconfig
 DEPENDS += "spice-protocol jpeg pixman alsa-lib glib-2.0 python-pyparsing-native python-six-native glib-2.0-native"
 DEPENDS_append_class-nativesdk = "nativesdk-openssl"
 
+# Otherwise nativesdk-spice fails like this:
+# http://errors.yoctoproject.org/Errors/Details/164866/
+LDFLAGS_append_class-nativesdk = " -lssp"
+
 export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
 export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
 
