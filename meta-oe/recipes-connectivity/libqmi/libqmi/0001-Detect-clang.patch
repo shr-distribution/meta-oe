@@ -1,4 +1,4 @@
-From 4cfb728804157e8f3c69e11ba4df449d8f76388f Mon Sep 17 00:00:00 2001
+From 3a95d82ba11d054c8d8abd332f053c787d0f924d Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 20 Oct 2016 04:42:26 +0000
 Subject: [PATCH] Detect clang
@@ -18,7 +18,7 @@ Upstream-Status: Pending
  1 file changed, 25 insertions(+), 4 deletions(-)
 
 diff --git a/m4/compiler-warnings.m4 b/m4/compiler-warnings.m4
-index de4a8b0..e4ba718 100644
+index 5ba490c..9202274 100644
 --- a/m4/compiler-warnings.m4
 +++ b/m4/compiler-warnings.m4
 @@ -2,10 +2,30 @@ AC_DEFUN([LIBQMI_COMPILER_WARNINGS],
@@ -80,6 +80,3 @@ index de4a8b0..e4ba718 100644
  else
  	AC_MSG_RESULT(no)
  fi
--- 
-1.9.1
-
