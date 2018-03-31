@@ -11,14 +11,12 @@ inherit autotools pkgconfig
 
 PV .= "+git${SRCPV}"
 
-# v1.0.3
-SRCREV = "28dff090c74b6ba8609c4797294a5afe3fe73987"
+SRCREV = "608de6d59a3de0eef0fbcbd8f284acbc018daa9a"
 SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
-           file://0001-build-fix-configure-script-neglecting-re-enable-out-.patch \
+           file://0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch \
           "
 S = "${WORKDIR}/git"
 
-CFLAGS += "-pthread -D_REENTRANT"
 do_configure_prepend() {
     ( cd ${S}
     ${S}/autogen.sh )
